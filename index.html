@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="fr">
+
+<head>
+  <title>jQuery_projet_02_exercice_04</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container-fluid bg-primary row justify-content-center p-3">
+    <h1 class="col-12 p-4 text-center">jQuery_projet_02 Exercice_04</h1>
+    <h2 class="col-9 p-4 text-center">Au clic sur un bouton de couleur, modifier la couleur du texte de la div</h2>
+    <div class="offset-1 col-10 row justify-content-center">
+      <div class="row bg-warning rounded p-2 m-2">
+        <div class="row col-12 justify-content-around" id="parentColor">
+          <div class="color green rounded p-3" id="green"></div>
+          <div class="color red rounded p-3" id="red"></div>
+          <div class="color blue rounded p-3" id="blue"></div>
+        </div>
+        <div class="row justify-content">
+          <input class="col-11 rounded p-3" type="text" name="inputColor" value="" id="input">
+          <button class="col-11 algin-self-center btn-outline rounded p-3" name="button" id="button">AJOUTER COULEUR !</button>
+        </div>
+        <div id="texte" class=" rounded p-3">
+          <p class="bg-light rounded p-2 m-2 text-justify">Tara, originellement nommée Antarctica puis Seamaster, est une goélette française destinée à la fois à l'exploration et à la défense de l'environnement. Dans le cadre de l'Année polaire
+            internationale, en 2007-2008, ce voilier est
+            utilisé en Arctique par l'expédition Tara Arctic dans le but de faire des relevés permettant de mieux comprendre les changements climatiques qui s'opèrent en Arctique. En 2009, dans le cadre de l'expédition Tara Oceans, Tara parcourt les
+            mers et les océans dans une circumnavigation de trois ans afin d'étudier le piégeage des molécules de gaz carbonique (CO2) par les micro-organismes marins comme le plancton. En avril 2016, une nouvelle expédition est montée Tara Pacific
+            dont l'objectif est de comprendre le corail, menacé par des facteurs humains et climatiques1.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.js">
+  </script>
+  <script>
+  $(document).ready(function(){
+        changeTextColor();
+        //on crée la fonction qui change la couleur du texte sur click des div colorées
+        function changeTextColor () {
+        // on cible toutes les div colorées ou qui seront crées plus tard
+          $('.color').click(function(){
+    //c'est la boucle qui permet de changer les div qui ne sont pas générée
+    //$('.color').length; le nombre de toutes les divs avec la classe color dans le html
+            for(var i = 0; i < $('.color').length; i++){
+    // avec .attr("") on récupre la valeur de l'id de toutes les divs qui existent dans le html
+              var idOfColor = $(this).attr('id');
+              $('#texte').css('color', idOfColor);
+            }
+          });
+        }
+
+    // //  la méthode .click
+       $('#button').click(function(){
+        // //         // sur le click on faut apparaître un input et un bouton
+       var newColor = $('input').val();
+       // newDiv une variable qui garde la div nouvellement crée
+       // newDiv a la class ".color par défaut cette classe lui donne les dimensions mais pas de couleur
+       var newDiv = $('<div class="color rounded p-3"</div>');
+       // méhode append() fait placer cette nouvelle div parmis les divs qui se trouvent dans la div parentColor
+       //méthode
+       var parent = $("#parentColor").append(newDiv);
+       // on donne l'attribut id="la valeur de l'input" C'est l'id qui permet de colorer le texte voir la couleur
+       newDiv.css("background-color", newColor);
+       //
+       newDiv.attr('id', newColor);
+       changeTextColor();
+       });
+
+  });
+
+    //******************** CORRECTION OLGA ****************************
+    // $(document).ready(function() {
+    //   // au click on séléctionne la classe '.color'
+    //   $('.color').click(function() {
+    //     // on crée une variable et on ajoute un attribut id à notre objet '.color', les id correspondents aux couleurs souhaitées pour la couleur du texte en css
+    //     //la méthode attr()  va renvoyer la valeur de l'élément qu'on passe en paramètre
+    //     var id = $(this).attr('id');
+    //     // au click on séléctionne notre texte et on lui applique la couleur correspondante à l'id de l'objet cliqué
+    //     // on applique la valeur de notre id à la classe css de la div #texte
+    //     $('#texte').css('color', id);
+    //   });
+    // });
+
+
+  </script>
+</body>
+
+</html>
